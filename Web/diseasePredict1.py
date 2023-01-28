@@ -43,7 +43,7 @@ print(mnb_tot.score(x, y))
 
 disease_pred = mnb_tot.predict(x)
 disease_real = y.values
-for i in range(0, len(disease_real)):
+for i in range(len(disease_real)):
     if disease_pred[i]!=disease_real[i]:
         print ('Pred: {0} Actual:{1}'.format(disease_pred[i], disease_real[i]))
 
@@ -86,9 +86,7 @@ features = cols
 for f in range(5):
     print("%d. feature %d - %s (%f)" % (f + 1, indices[f], features[indices[f]] ,importances[indices[f]]))
 
-feature_dict = {}
-for i,f in enumerate(features):
-    feature_dict[f] = i
+feature_dict = {f: i for i, f in enumerate(features)}
 print("Enter 3 Symptoms")
 for i in ["itching","nodal_skin_eruptions","skin_rash"]:
     s=i
