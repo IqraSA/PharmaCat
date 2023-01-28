@@ -1,4 +1,4 @@
-import pandas as pd 
+import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import classification_report
@@ -9,20 +9,24 @@ import pickle
 
 data=pd.read_csv('Data/drugsComTrain_raw.csv')
 df_X=data['review']
-df_X=df_X[0:5000]
+df_X = df_X[:5000]
 df_Y1=data['condition']
-df_Y1=df_Y1[0:5000]
+df_Y1 = df_Y1[:5000]
 
 #nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 corpus=[]
 ps=PorterStemmer()
-for i in range(0,len(df_X)):
+for i in range(len(df_X)):
     review=re.sub('[^a-zA-Z]', ' ', df_X[i]) #dataset.values[0][0] will also work
     review=review.lower()
     review=review.split()
-    review=[ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
+    review = [
+        ps.stem(word)
+        for word in review
+        if word not in set(stopwords.words('english'))
+    ]
     review=' '.join(review)
     corpus.append(review)
 print("hi")
